@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 import styles from '../CSS/map.module.css'
 
 
 
-function Mapinfo({ weather , darklabel }) {
-
+function Mapinfo({ weather, darklabel }) {
+    
+    
+    
+    const [showpop, setshowpop] = useState(false)
+    
+    
+    
+    
+    if (weather.current != null) {
+        console.log(darklabel) 
+        console.log(weather.location)       
+    }
+    
+    
     const [myView, setmyView] = useState({
         latitude: 20.5937,
         longitude: 78.9629,
@@ -13,16 +26,8 @@ function Mapinfo({ weather , darklabel }) {
         height: "85vh",
         zoom: 4,
     });
-
-    const [showpop, setshowpop] = useState(false)
-
-
-    if (weather.current != null) {
-        console.log(weather)
-        console.log(darklabel)
-
-        
-    }
+  
+    console.log(myView)
     
 
 
@@ -30,7 +35,7 @@ function Mapinfo({ weather , darklabel }) {
         <div>{weather.current &&
 
             <Map style={{ margin: "auto", marginTop: "20px" }} {...myView} mapboxApiAccessToken={process.env.REACT_APP_MAP_API} onViewportChange={viewport => setmyView(viewport)} mapStyle={`mapbox://styles/mapbox/${darklabel.labeltwo}`}>
-                <NavigationControl/>
+                <NavigationControl />
                 <Marker key={weather.location.name} latitude={weather.location.lat} longitude={weather.location.lon}>
                     <button className={styles.button} onClick={() => setshowpop(true)}   >{weather.location.name}</button>
                 </Marker>
@@ -53,7 +58,7 @@ function Mapinfo({ weather , darklabel }) {
                                 </li>
 
                                 <li>
-                                 Pressure : {weather.current.pressure_mb} mb
+                                    Pressure : {weather.current.pressure_mb} mb
                                 </li>
                             </ul>
                         </div>
