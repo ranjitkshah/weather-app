@@ -65,7 +65,7 @@ function App() {
 
   const search = evt=>{
     if(evt.key==="Enter"){
-      fetch(`http://api.weatherapi.com/v1/current.json?key=${api.key}&q=${query}`)
+      fetch(`https://api.weatherapi.com/v1/current.json?key=${api.key}&q=${query}`)
       .then(res =>
         res.json())
     .then(result => {
