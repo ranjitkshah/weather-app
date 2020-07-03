@@ -13,10 +13,10 @@ import Mapinfo from './Comp/Mapinfo';
  
 // import Data from './Comp/Data';
 
-// const api ={
-//   key:"886705b4c1182eb1c69f28eb8c520e20",
-//   base:"https://api.openweathermap.org/data/2.5/"
-// }
+const api ={
+  key:"7602268638114c69a4d203201202106",
+  
+}
 
 function App() {
   
@@ -30,9 +30,11 @@ function App() {
   const [error, setError] = useState('')
   const [dark, setdark] = useState(getmode())
   const [darklabel, setdarklabel] = useState({
-    labelone:"Day",
+    labelone:"Night",
     labeltwo:"streets-v11",
   })
+
+  
   
 
   useEffect(() => {
@@ -63,7 +65,7 @@ function App() {
 
   const search = evt=>{
     if(evt.key==="Enter"){
-      fetch(`http://api.weatherapi.com/v1/current.json?key=7602268638114c69a4d203201202106&q=${query}`)
+      fetch(`http://api.weatherapi.com/v1/current.json?key=${api.key}&q=${query}`)
       .then(res =>
         res.json())
     .then(result => {
@@ -141,7 +143,7 @@ function App() {
             </label>
             </div>
           </div>
-          <span className={dark?"map-info":"dark-map-info"} >For more info check out Map</span>
+          <span className={dark?"map-info":"dark-map-info"} >For more info tap on location</span>
           <div className="mapdata" >
 
               <Mapinfo darklabel={darklabel} weather={weather} />
