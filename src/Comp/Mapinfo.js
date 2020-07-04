@@ -1,5 +1,5 @@
 import React, { useState ,useEffect } from 'react'
-import Map, { Marker, NavigationControl, Popup , FlyToInterpolator } from 'react-map-gl'
+import Map, { Marker, NavigationControl, Popup , FlyToInterpolator , WebMercatorViewport } from 'react-map-gl'
 import styles from '../CSS/map.module.css'
 
 
@@ -33,10 +33,10 @@ function Mapinfo({ weather, darklabel }) {
 
 
 
-    const onViewportChange = (viewport)=>{
-        setmyView(viewport)
+    // const onViewportChange = (viewport)=>{
+    //     setmyView(viewport)
 
-    }
+    // }
   
     
 
@@ -47,7 +47,11 @@ function Mapinfo({ weather, darklabel }) {
             (
         
 
-            <Map style={{ margin: "auto", marginTop: "20px" }} {...myView} mapboxApiAccessToken="pk.eyJ1IjoicmFuaml0a3NoYWgiLCJhIjoiY2ticWNkanUzMmllczJybmN3NmV5NmxhbyJ9.xLeI2B_Zuvtze-APbGfctA" onViewportChange={onViewportChange} mapStyle={`mapbox://styles/mapbox/${darklabel.labeltwo}`}>
+            <Map style={{ margin: "auto", marginTop: "20px" }}   width={400}
+            height={600}
+            latitude={weather.location.lat}
+            longitude={weather.location.lon}
+            zoom={14} mapboxApiAccessToken="pk.eyJ1IjoicmFuaml0a3NoYWgiLCJhIjoiY2ticWNkanUzMmllczJybmN3NmV5NmxhbyJ9.xLeI2B_Zuvtze-APbGfctA"  onViewportChange={(viewport)=>setmyView(viewport)} mapStyle={`mapbox://styles/mapbox/${darklabel.labeltwo}`}>
                 <NavigationControl />
                 <Marker key={weather.location.name} latitude={weather.location.lat} longitude={weather.location.lon}>
                     <button className={styles.button} onClick={() => setshowpop(true)}   >{weather.location.name}</button>
